@@ -1,24 +1,29 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Reservation;
-use App\Models\Ressource;
+// On remplace le Model de base par Authenticatable
+use Illuminate\Foundation\Auth\User as Authenticatable; 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Utilisateur extends Model
+class Utilisateur extends Authenticatable
 {
-    protected $table = 'utilisateur';
-    protected $fillable = ['nom', 'prenom', 'email', 'password', 'roles', 'status',];
+    use Notifiable;
 
-    // Un utilisateur peut faire plusieurs réservations
-    public function reservation()
+    protected $table = 'utilisateur';
+    
+    // Ajoute 'password' dans les fillable (déjà fait, c'est bien)
+    protected $fillable = ['nom', 'prenom', 'email', 'password', 'roles', 'status'];
+
+    // On cache le mot de passe pour la sécurité
+    protected $hidden = ['password', 'remember_token'];
+
+    public function reservation(): HasMany
     {
-     return $this->hasMany(Reservation::class, 'utilisateur_id');
+        return $this->hasMany(Reservation::class, 'utilisateur_id');
     }
 
-    // Un utilisateur (responsable) peut gérer plusieurs ressources
-    public function ressources()
+    public function ressources(): HasMany
     {
         return $this->hasMany(Ressource::class, 'utilisateur_id');
     }
