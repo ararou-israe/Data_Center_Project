@@ -14,8 +14,8 @@ class Reservation extends Model
         'ressource_id',
         'status',
         'justification',
-        'start_at',
-        'end_at',
+        'date_debut',
+        'date_fin',
         'decision_note',
     ];
 
