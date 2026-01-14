@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\inscriptionController;
 
 // --- ROUTES PUBLIQUES ---
 Route::get('/', function () {
@@ -13,9 +14,15 @@ Route::get('/', function () {
 
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-Route::get('/register', function () {
-    return "Page d'inscription";
-})->name('register');
+// inscription 
+Route::get('/register', [InscriptionController::class, 'create'])
+    ->name('register');
+
+Route::post('/register', [InscriptionController::class, 'store'])
+    ->name('register.store');
+
+Route::get('/confirmation', [InscriptionController::class, 'confirmation'])
+    ->name('confirmation');
 
 
 //  ROUTES PROTÉGÉES (Utilisateurs connectés uniquement) 
