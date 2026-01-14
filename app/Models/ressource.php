@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Categorie;
 use App\Models\Reservation;
-use App\Models\Utilisateur;
 
 
 class Ressource extends Model
@@ -16,10 +15,10 @@ class Ressource extends Model
 
     protected $fillable = [
         'categorie_id',
-        'utilisateur_id',
         'code',
         'nom',
         'etat',
+        'description',
         'cpu',
         'ram',
         'storage',
@@ -32,11 +31,7 @@ class Ressource extends Model
         return $this->belongsTo(Categorie::class, 'categorie_id');
     }
 
-    // Responsable/gestionnaire de la ressource (peut être null)
-    public function responsable(): BelongsTo
-    {
-        return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
-    }
+    
 
     // Une ressource peut avoir plusieurs réservations dans le temps
     public function reservations(): HasMany

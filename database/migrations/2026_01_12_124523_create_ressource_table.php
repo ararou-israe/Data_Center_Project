@@ -17,10 +17,6 @@ return new class extends Migration
             $table->foreignId('categorie_id')
                   ->constrained('categorie')
                   ->cascadeOnDelete();
-            $table->foreignId('utilisateur_id')
-      ->nullable()
-      ->constrained('utilisateur')
-      ->nullOnDelete();
 
             $table->string('code', 50)->unique();     // SRV-001, VM-014
             $table->string('nom', 150);
@@ -31,14 +27,14 @@ return new class extends Migration
                 'maintenance',
                 'indisponible',
             ])->default('disponible');
-
-            $table->integer('cpu'); 
-            $table->integer('ram');
-            $table->integer('storage');
+            $table->text('description')->nullable();
+            $table->integer('cpu')->nullable();
+            $table->integer('ram')->nullable();
+            $table->integer('storage')->nullable();
             $table->enum('os', [
                 'Linux',
                 'Windows',
-            ])->default('Linux');
+            ])->default('Linux')->nullable();
 
             $table->timestamps(); // created_at, updated_at
         
