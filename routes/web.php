@@ -5,50 +5,63 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\inscriptionController;
+use App\Http\Controllers\reservController; // Controller ديال réservation
 
-// --- ROUTES PUBLIQUES ---
+// ====================== ROUTES PUBLIQUES ======================
+
+// Page login
 Route::get('/', function () {
-    
     return view('welcome');
 })->name('login');
 
+// Submit login
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-// inscription 
-Route::get('/register', [InscriptionController::class, 'create'])
-    ->name('register');
-
-Route::post('/register', [InscriptionController::class, 'store'])
-    ->name('register.store');
-
-Route::get('/confirmation', [InscriptionController::class, 'confirmation'])
-    ->name('confirmation');
+// Inscription
+Route::get('/register', [InscriptionController::class, 'create'])->name('register');
+Route::post('/register', [InscriptionController::class, 'store'])->name('register.store');
+Route::get('/confirmation', [InscriptionController::class, 'confirmation'])->name('confirmation');
 
 
-//  ROUTES PROTÉGÉES (Utilisateurs connectés uniquement) 
+// ====================== ROUTES PROTÉGÉES ======================
 Route::middleware(['auth'])->group(function () {
-    
-    // 1. Dashboard de redirection 
+
+    // Dashboard générique (redirection après login)
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // 2. Section ADMIN (saad)
+    // ================= ADMIN =================
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/admin/dashboard', function() { return "Tableau de bord Admin"; })->name('admin.dashboard');
-        Route::get('/admin/users', function() { return "Liste des utilisateurs"; });
+        Route::get('/admin/dashboard', function() {
+            return "Tableau de bord Admin";
+        })->name('admin.dashboard');
+
+        Route::get('/admin/users', function() {
+            return "Liste des utilisateurs";
+        });
     });
 
-    // 3. Section RESPONSABLE TECHNIQUE (Hajar)
+    // ================= RESPONSABLE TECHNIQUE =================
     Route::middleware(['role:responsable'])->group(function () {
-        Route::get('/responsable/dashboard', [ResourceController::class, 'dashboard'])->name('responsable.dashboard');
-        Route::get('/responsable/validations', function() { return "Demandes en attente"; });
+        Route::get('/responsable/dashboard', [ResourceController::class, 'dashboard'])
+            ->name('responsable.dashboard');
+
+        Route::get('/responsable/validations', function() {
+            return "Demandes en attente";
+        });
     });
 
-    // 4. Section UTILISATEUR INTERNE (Israe)
-    
+    // ================= UTILISATEUR INTERNE =================
     Route::middleware(['role:utilisateur_interne'])->group(function () {
-        Route::get('/utilisateur/dashboard', function() { return "Espace de réservation"; })->name('utilisateur.dashboard');
-        Route::get('/reservation/creer', function() { return "Formulaire de réservation"; });
+
+        // Dashboard utilisateur interne (affiche ressources + tableau + formulaire)
+        Route::get('/utilisateur/dashboard', [reservController::class, 'index'])
+            ->name('utilisateur.dashboard');
+
+        // Stockage demande réservation
+        Route::post('/reservation/store', [reservController::class, 'store'])
+            ->name('reservation.store');
     });
 
+    // ================= LOGOUT =================
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
