@@ -23,6 +23,11 @@ class Ressource extends Model
         'ram',
         'storage',
         'os',
+        'type_stockage',
+        'emplacement',
+        'bande_passante',
+        'created_at',
+        'updated_at',
     ];
 
     // Une ressource appartient à une catégorie

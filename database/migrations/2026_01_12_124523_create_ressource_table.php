@@ -30,13 +30,22 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('cpu')->nullable();
             $table->integer('ram')->nullable();
-            $table->integer('storage')->nullable();
+            $table->integer('storage')->nullable();// in GB
             $table->enum('os', [
                 'Linux',
                 'Windows',
             ])->default('Linux')->nullable();
+             $table->enum("type_stockage", [
+                'HDD',
+                'SSD',
+                "NVMe",
+            ])->nullable();
+            $table->string('emplacement', 255)->nullable();
+             $table->integer("bande_passante")->nullable();// in Mbps
+
 
             $table->timestamps(); // created_at, updated_at
+
         
         });
     }
