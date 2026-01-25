@@ -17,6 +17,10 @@ return new class extends Migration
             $table->foreignId('categorie_id')
                   ->constrained('categorie')
                   ->cascadeOnDelete();
+            $table->foreignId('utilisateur_id')
+      ->nullable()
+      ->constrained('utilisateur')
+      ->nullOnDelete();
 
             $table->string('code', 50)->unique();     // SRV-001, VM-014
             $table->string('nom', 150);
@@ -28,24 +32,15 @@ return new class extends Migration
                 'indisponible',
             ])->default('disponible');
             $table->text('description')->nullable();
-            $table->integer('cpu')->nullable();
-            $table->integer('ram')->nullable();
-            $table->integer('storage')->nullable();// in GB
+            $table->integer('cpu'); 
+            $table->integer('ram');
+            $table->integer('storage');
             $table->enum('os', [
                 'Linux',
                 'Windows',
-            ])->default('Linux')->nullable();
-             $table->enum("type_stockage", [
-                'HDD',
-                'SSD',
-                "NVMe",
-            ])->nullable();
-            $table->string('emplacement', 255)->nullable();
-             $table->integer("bande_passante")->nullable();// in Mbps
-
+            ])->default('Linux');
 
             $table->timestamps(); // created_at, updated_at
-
         
         });
     }
