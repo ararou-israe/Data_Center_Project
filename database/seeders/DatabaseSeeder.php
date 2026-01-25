@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(categorieSeeder::class);
         $this->call(ressourceSeeder::class);
         $this->call(reservationSeeder::class);
+        $this->call(sigProbSeeder::class);
 
 
         User::factory()->create([
