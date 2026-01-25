@@ -5,9 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\inscriptionController;
-use App\Http\Controllers\reservController; // Controller ديال réservation
+use App\Http\Controllers\reservController; 
 
-// ====================== ROUTES PUBLIQUES ======================
+// routes generales
 
 // Page login
 Route::get('/', function () {
@@ -17,7 +17,7 @@ Route::get('/', function () {
 // Submit login
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
-// Inscription
+//  page Inscription
 Route::get('/register', [InscriptionController::class, 'create'])->name('register');
 Route::post('/register', [InscriptionController::class, 'store'])->name('register.store');
 Route::get('/confirmation', [InscriptionController::class, 'confirmation'])->name('confirmation');
@@ -50,16 +50,19 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    // ================= UTILISATEUR INTERNE =================
+    // interface de  UTILISATEUR INTERNE  enseignant ingenieur er doctorant
     Route::middleware(['role:utilisateur_interne'])->group(function () {
 
-        // Dashboard utilisateur interne (affiche ressources + tableau + formulaire)
+        // Dashboard utilisateur interne ( ressources + tableau + formulaire)
         Route::get('/utilisateur/dashboard', [reservController::class, 'index'])
             ->name('utilisateur.dashboard');
 
         // Stockage demande réservation
         Route::post('/reservation/store', [reservController::class, 'store'])
             ->name('reservation.store');
+        // Soumettre un signalement de problème
+        Route::post('/sig-prob', [reservController::class, 'storeSigProb'])->name('sigProb.store');    
+           
     });
 
     // ================= LOGOUT =================
