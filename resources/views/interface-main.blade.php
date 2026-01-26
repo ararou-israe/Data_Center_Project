@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+   
 <!-- ================= NAVBAR ================= -->
 <header class="navbar">
   <div class="nav-inner">
@@ -33,18 +33,42 @@
 
   </div>
 </header>
+<!-- ?????????????????????????her??????????????????????? -->
+<!-- HERO SECTION (between navbar and cards) -->
+<section class="hero-section">
+    <!-- background effects -->
+    <img class="hero-gradient" src="{{ asset('images/gradient.png') }}" alt="">
+    <div class="hero-blur"></div>
 
-<!-- ================= HERO ================= -->
-<section class="hero" id="accueil">
-  <div class="hero-inner">
-    <h1>Réservation de Ressources Informatiques</h1>
-    <p>
-      Consultez les ressources du Data Center, vérifiez la disponibilité
-      et lancez vos demandes de réservation.
-    </p>
-  </div>
+    <div class="hero-inner">
+        <!-- LEFT CONTENT -->
+        <div class="hero-content">
+            <div class="tag-box">
+                <div class="tag">INTRUCTING & WEDBAR</div>
+            </div>
+
+            <h1>
+                ENAIL FOR <br>
+                DEVOLOPPER
+            </h1>
+
+            <p class="description">
+                Consultez les ressources du Data Center,
+                vérifiez la disponibilité et lancez vos demandes de réservation.
+            </p>
+
+            <a href="#" class="btn-signing-main">GET started ></a>
+        </div>
+
+        <!-- RIGHT ROBOT -->
+        <spline-viewer
+            class="hero-robot"
+            url="https://prod.spline.design/JcIhzZR8V-9YIrHV/scene.splinecode">
+        </spline-viewer>
+    </div>
 </section>
 
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.36/build/spline-viewer.js"></script>
 <!-- ================= MAIN ================= -->
 <main class="wrap" id="ressources">
 
@@ -89,7 +113,7 @@
             <p class="desc">{{ $r->description }}</p>
 
             <div class="card-footer">
-              <button class="btn-view">View More</button>
+              <button class="btn-view"><a class="ko"  href="#">View More</a></button>
             </div>
           </div>
 
@@ -114,7 +138,7 @@
 </main>
 
 <!-- ================= FOOTER (UNCHANGED) ================= -->
-<footer class="footer">
+<footer id="onnn" class="footer">
   <div class="footer-content">
     <h2>DATA CENTER RESOURCES, BUILT FOR RELIABLE OPERATIONS</h2>
 
