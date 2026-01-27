@@ -93,8 +93,6 @@ color: white;
   /* text-shadow: 0 0 8px rgba(53, 99, 245, 0.6); */
 }
 
-/* ?????????????????????????????????? */
-/* CONTAINER STYLE */
 
 /* ================= HERO SECTION ================= */
 
@@ -298,18 +296,14 @@ background-color: #000;
   display: flex;
   gap: 26px;
   padding: 20px;
-  width: max-content;      /* 🔥 CRITICAL FIX */
+  width: max-content;    
   transition: transform .35s ease;
 }
 /* ================= CARD ================= */
 .card {
-  /* flex: 0 0 calc((100% - 52px) / 3);
-  background: #fff;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 20px 45px rgba(16,24,40,.12); */
 
-    flex: 0 0 320px;         /* 🔥 FIXED WIDTH */
+
+    flex: 0 0 320px;         
   background: #fff;
   border-radius: 28px;
   overflow: hidden;
@@ -340,8 +334,6 @@ background-color: #000;
   box-shadow: 0 30px 70px rgba(16,24,40,.25);
   z-index: 10;
 }
-
-/* Hovered card comes forward */
 
 
 
@@ -402,8 +394,7 @@ background-color: #000;
 
   display: flex;
   flex-direction: column;
-  flex: 1; /* 🔥 fills remaining height */
-}
+  flex: 1;}
 
 /* ===== CARD BOTTOM TEXT (CONSISTENT FOR ALL) ===== */
 .card-bottom h3 {
