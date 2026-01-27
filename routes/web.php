@@ -18,36 +18,32 @@ Route::get('/', [ResourceController::class, 'index'])->name('home');
 // Optional alias (same page)
 Route::get('/interface', [ResourceController::class, 'index'])->name('interface');
 
-// -------------------- AUTH --------------------
 
-// Login page
+
+// page de login
 Route::get('/login', function () {
-    return view('welcome'); // your login blade
+    return view('welcome'); // login blade
 })->name('login');
 
 // Login submit
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login.submit');
 
-// Register page
-Route::get('/register', [InscriptionController::class, 'create'])
-    ->name('register');
+// page d insceription
+Route::get('/register', [InscriptionController::class, 'create'])->name('register');
 
 // Register submit
-Route::post('/register', [InscriptionController::class, 'store'])
-    ->name('register.store');
+Route::post('/register', [InscriptionController::class, 'store'])->name('register.store');
 
-// Register confirmation
-Route::get('/confirmation', [InscriptionController::class, 'confirmation'])
-    ->name('confirmation');
+// page de confirmation après inscription
+Route::get('/confirmation', [InscriptionController::class, 'confirmation'])->name('confirmation');
 
 
-// =======================================================
-// PROTECTED ROUTES (AUTH REQUIRED)
-// =======================================================
+// les routes protégées 
+
 Route::middleware(['auth'])->group(function () {
 
-    // Generic dashboard (can redirect by role later)
+    // Generic dashboard 
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
@@ -74,14 +70,17 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    // ---------------- UTILISATEUR INTERNE ----------------
+    // interface de UTILISATEUR INTERNE enseignaant ingeninieur et doctorant
     Route::middleware(['role:utilisateur_interne'])->group(function () {
+        // dashboard utilisateur interne(ressource tableau et formulaire)
 
         Route::get('/utilisateur/dashboard', [reservController::class, 'index'])
             ->name('utilisateur.dashboard');
+            //stocker demande de reservation
 
         Route::post('/reservation/store', [reservController::class, 'store'])
             ->name('reservation.store');
+            //signaler un probleme
 
         Route::post('/sig-prob', [reservController::class, 'storeSigProb'])
             ->name('sigProb.store');
