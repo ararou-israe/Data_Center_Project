@@ -9,7 +9,7 @@
 </head>
 
 <body>
-   
+
 <!-- ================= NAVBAR ================= -->
 <header class="navbar">
   <div class="nav-inner">
@@ -27,15 +27,18 @@
     </nav>
 
     <div class="nav-actions">
-      <a class="btn" href="#">Se connecter</a>
-      <a class="btn primary" href="#">S’inscrire</a>
+      {{-- ✅ BUTTON 1: Login --}}
+      <a class="btn" href="{{ route('login') }}">Se connecter</a>
+
+      {{-- ✅ BUTTON 2: Register --}}
+      <a class="btn primary" href="{{ route('register') }}">S’inscrire</a>
     </div>
 
   </div>
 </header>
-<!-- ?????????????????????????her??????????????????????? -->
-<!-- HERO SECTION (between navbar and cards) -->
-<section class="hero-section">
+
+<!-- HERO SECTION -->
+<section class="hero-section" id="accueil">
     <!-- background effects -->
     <img class="hero-gradient" src="{{ asset('images/gradient.png') }}" alt="">
     <div class="hero-blur"></div>
@@ -57,7 +60,8 @@
                 vérifiez la disponibilité et lancez vos demandes de réservation.
             </p>
 
-            <a href="#" class="btn-signing-main">GET started ></a>
+            {{-- ✅ HERO BUTTON: go to register --}}
+            <a href="{{ route('register') }}" class="btn-signing-main">GET started &gt;</a>
         </div>
 
         <!-- RIGHT ROBOT -->
@@ -69,6 +73,7 @@
 </section>
 
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.36/build/spline-viewer.js"></script>
+
 <!-- ================= MAIN ================= -->
 <main class="wrap" id="ressources">
 
@@ -113,7 +118,10 @@
             <p class="desc">{{ $r->description }}</p>
 
             <div class="card-footer">
-              <button class="btn-view"><a class="ko"  href="#">View More</a></button>
+              {{-- ✅ View More (safe placeholder) --}}
+              <button class="btn-view">
+                <a class="ko" href="#">View More</a>
+              </button>
             </div>
           </div>
 
@@ -137,49 +145,57 @@
   </section>
 </main>
 
-<!-- ================= FOOTER (UNCHANGED) ================= -->
+<!-- ================= FOOTER ================= -->
 <footer id="onnn" class="footer">
   <div class="footer-content">
     <h2>DATA CENTER RESOURCES, BUILT FOR RELIABLE OPERATIONS</h2>
 
-   <p> Designed for environments where performance, availability, and control matter, this platform centralizes the management of data center resources across servers,
-     virtual machines, storage, and network equipment. Every component is tracked, structured, and accessible through a single, consistent interface. </p>
-    <p> From academic infrastructures to professional IT environments, the system supports controlled reservation and allocation of resources based on clearly defined roles. Users request what they need.
-       Administrators validate, supervise, and maintain full visibility over usage, capacity, and availability—without manual workarounds. </p> 
-    <p> Built on structured data management, the platform enforces traceability at every step. Each reservation, modification, and assignment is logged,
-       making resource usage transparent and auditable over time. </p>
-     <p> The platform is designed to scale with real infrastructure. Whether managing a limited training lab or a multi-resource data center, it supports efficient utilization,
-       reduces administrative overhead, and ensures resources are used responsibly and securely. </p>
+    <p>
+      Designed for environments where performance, availability, and control matter, this platform centralizes the management of data center resources across servers,
+      virtual machines, storage, and network equipment. Every component is tracked, structured, and accessible through a single, consistent interface.
+    </p>
+    <p>
+      From academic infrastructures to professional IT environments, the system supports controlled reservation and allocation of resources based on clearly defined roles. Users request what they need.
+      Administrators validate, supervise, and maintain full visibility over usage, capacity, and availability—without manual workarounds.
+    </p>
+    <p>
+      Built on structured data management, the platform enforces traceability at every step. Each reservation, modification, and assignment is logged,
+      making resource usage transparent and auditable over time.
+    </p>
+    <p>
+      The platform is designed to scale with real infrastructure. Whether managing a limited training lab or a multi-resource data center, it supports efficient utilization,
+      reduces administrative overhead, and ensures resources are used responsibly and securely.
+    </p>
 
-<a href="#top" class="footer-logo-link">
-  <img src="{{ asset('images/logo-noire.png') }}" class="footer-logo">
-</a>
+    <a href="#top" class="footer-logo-link">
+      <img src="{{ asset('images/logo-noire.png') }}" class="footer-logo">
+    </a>
 
   </div>
 </footer>
 
 <div class="footer-divider"></div>
 
-<footer class="dc-footer">
+<footer class="dc-footer" id="support">
   <div class="footer-container">
 
     <div class="footer-column">
       <h4>RESOURCES</h4>
       <ul>
-     <li><a href="#ressources" data-cat="serveur">Servers</a></li>
-    <li><a href="#ressources" data-cat="vm">Virtual Machines</a></li>
-    <li><a href="#ressources" data-cat="stockage">Storage</a></li>
-    <li><a href="#ressources" data-cat="reseau">Network Equipment</a></li>
-
+        <li><a href="#ressources" data-cat="serveur">Servers</a></li>
+        <li><a href="#ressources" data-cat="vm">Virtual Machines</a></li>
+        <li><a href="#ressources" data-cat="stockage">Storage</a></li>
+        <li><a href="#ressources" data-cat="reseau">Network Equipment</a></li>
       </ul>
     </div>
 
     <div class="footer-column">
       <h4>RESERVATIONS</h4>
       <ul>
-        <li><a href="#">New Reservation</a></li>
-        <li><a href="#">My Reservations</a></li>
-        <li><a href="#">Pending Requests</a></li>
+        {{-- Protected page (will require login) --}}
+        <li><a href="{{ route('register') }}">New Reservation</a></li>
+        <li><a href="{{ route('register') }}">My Reservations</a></li>
+        <li><a href="{{ route('register') }}">Pending Requests</a></li>
       </ul>
     </div>
 
