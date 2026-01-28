@@ -133,10 +133,10 @@
             <strong>{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</strong>
         </div>
         <ul class="nav-links">
-            <li class="nav-liksthis"><a href="{{ route('/admin/dashboard') }}"><i class="fa-solid fa-chart-line"></i> Statistiques</a></li>
-            <li><a href="{{ route('/admin/users') }}"><i class="fa-solid fa-user-tie"></i> Gère les utilisateurs</a></li>
-            <li><a href="{{ route('/admin/ressources') }}"><i class="fa-solid fa-microchip"></i> Gère les ressources</a></li>
-            <li><a href="{{ route('/admin/users') }}#Demandes"><i class="fa-solid fa-calendar-check"></i> Demandes ({{$size_userd}})</a></li>
+            <li ><a href="{{ route('/admin/dashboard') }}"><i class="fa-solid fa-chart-line"></i> Statistiques</a></li>
+            <li ><a href="{{ route('/admin/users') }}"><i class="fa-solid fa-user-tie"></i> Gère les utilisateurs</a></li>
+            <li class="nav-liksthis"><a href="{{ route('/admin/ressources') }}"><i class="fa-solid fa-microchip"></i> Gère les ressources</a></li>
+            <li><a href="{{ route('/admin/users') }}#Demandes"><i class="fa-solid fa-calendar-check"></i> Demandes ({{$sizedemond}})</a></li>
         </ul>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
@@ -151,53 +151,13 @@
                 <button class="hamburger" id="toggleSidebar" type="button" aria-label="Ouvrir/Fermer le menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
-                <h1>Consultation des statistiques globales</h1>
+                <h1>Gestion des ressources</h1>
             </div>
 
             <span style="color: #718096;">{{ date('d/m/Y') }}</span>
         </div>
+  
 
-        <div class="stats-container">
-            <div class="stat-card">
-                <h3>Ressources supervisées</h3>
-                <div class="value">{{$sizeressources}}</div>
-            </div>
-            <div class="stat-card" style="border-left-color: #48bb78;">
-                <h3>Ressources en maintenance</h3>
-                <div class="value">{{$sizeressources_m}}</div>
-            </div>
-            <div class="stat-card" style="border-left-color: #48bb78;">
-                <h3>Ressources indisponible </h3>
-                <div class="value">{{$sizeressources_i}}</div>
-            </div>
-            <div class="stat-card" style="border-left-color: #ed8936;">
-                <h3>incidents_total</h3>
-                <div class="value">{{$size_incidents}}</div>
-            </div>
-            
-            <div class="stat-card" style="border-left-color: #ed8936;">
-                <h3>Active users</h3>
-                <div class="value">{{$size_usersa}}</div>
-            </div>
-            <div class="stat-card" style="border-left-color: #ed8936;">
-                <h3>Demandes d'inscription</h3>
-                <div class="value">{{$size_userd}}</div>
-            </div>
-            <div class="stat-card" style="border-left-color: #48bb78;">
-                <h3>Réservations Actives</h3>
-                <div class="value">{{$size_resrv_a}}</div>
-            </div>
-            <div class="stat-card" style="border-left-color: #ed8936;">
-                <h3>Réservations en attente</h3>
-                <div class="value">{{$size_resrv_d}}</div>
-            </div>
-            </div>
-
-
-            <div class="data-table-container" style="margin-bottom: 30px;">
-            <h2>Réservations créées (30 derniers jours)</h2>
-            <canvas id="reservationsChart" height="90"></canvas>
-            </div>
     </div>
 
     <!-- ✅ ADDED: tiny JS (no libraries) -->
@@ -251,40 +211,6 @@
             });
         })();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const labels = {!! json_encode($labels) !!};
-    const values = {!! json_encode($values) !!};
- 
-
-    const ctx = document.getElementById('reservationsChart');
-
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Réservations',
-                data: values,
-                tension: 0.3,
-                fill: false
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: true }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { precision: 0 }
-                }
-            }
-        }
-    });
-</script>
-
 
 </body>
 </html>

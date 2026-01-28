@@ -7,7 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\inscriptionController;
 use App\Http\Controllers\reservController; 
-
+use App\Http\Controllers\AdminController;
 // routes generales
 // ✅ FIRST PAGE SEEN BY USER = INTERFACE
 // (loaded via controller to always have $ressources)
@@ -39,13 +39,21 @@ Route::middleware(['auth'])->group(function () {
 
     //  ADMIN 
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/admin/dashboard', function() {
+    
+        Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('/admin/dashboard');
+        Route::get('/admin/users', [AdminController::class, 'user'])->name('/admin/users');
+        Route::get('/admin/ressources', [AdminController::class, 'ressource'])->name('/admin/ressources');
+
+        /* Route::get('/admin/dashboard', function() {
             return "Tableau de bord Admin";
         })->name('admin.dashboard');
 
         Route::get('/admin/users', function() {
             return "Liste des utilisateurs";
         });
+        Route::get('/admin', function() {
+            return view('Administrateur');
+        });*/
     });
 
    // RESPONSABLE TECHNIQUE 
