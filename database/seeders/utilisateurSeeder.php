@@ -20,7 +20,7 @@ class utilisateurSeeder extends Seeder
             'email' => 'israe.ararou@example.com',
             'password' => hash::make('israe123'),
             'roles' => 'utilisateur_interne',
-            'status' => 'en attente',
+            'status' => 'active',
             'created_at' => now(),
             'updated_at' => now()
             ],
