@@ -191,24 +191,42 @@
         @endif
 
         <div class="card">
-            <h2>➕ Ajouter une nouvelle ressource</h2>
-            <form action="{{ route('ressource.store') }}" method="POST">
-                @csrf
-                <div class="form-grid">
-                    <input type="text" name="nom" placeholder="Nom de la ressource" required>
-                    <input type="text" name="code" placeholder="Code unique" required>
-                    <select name="os" required>
-                        <option value="Linux">Système : Linux</option>
-                        <option value="Windows">Système : Windows</option>
-                    </select>
-                    <input type="number" name="cpu" placeholder="CPU (Cores)" required min="1">
-                    <input type="number" name="ram" placeholder="RAM (Go)" required min="1">
-                    <input type="number" name="storage" placeholder="Stockage (Go)" required min="1">
-                    <input type="hidden" name="categorie_id" value="1"> 
-                    <button type="submit" class="btn-add">ENREGISTRER LA RESSOURCE</button>
-                </div>
-            </form>
+    <h2>➕ Ajouter une nouvelle ressource</h2>
+    <form action="{{ route('ressource.store') }}" method="POST">
+        @csrf
+        <div class="form-grid">
+            <input type="text" name="nom" placeholder="Nom de la ressource (ex: Serveur Web)" required>
+            <input type="text" name="code" placeholder="Code unique (ex: SRV-001)" required>
+            
+            <select name="categorie_id" required>
+                <option value="1">Catégorie : Serveur</option>
+                <option value="2">Catégorie : Réseau (Switch/Router)</option>
+                <option value="3">Catégorie : Stockage (NAS/SAN)</option>
+            </select>
+
+            <select name="os" required>
+                <option value="Linux">Système : Linux</option>
+                <option value="Windows">Système : Windows</option>
+                <option value="Cisco/Autre">Système : Autre (Cisco, etc.)</option>
+            </select>
+            <input type="number" name="cpu" placeholder="CPU (Cores)" required min="1">
+            <input type="number" name="ram" placeholder="RAM (Go)" required min="1">
+            <input type="number" name="storage" placeholder="Stockage (Go)" required min="1">
+
+            <select name="type_stockage" required>
+                <option value="SSD">Type : SSD</option>
+                <option value="HDD">Type : HDD</option>
+                <option value="NVMe">Type : NVMe</option>
+            </select>
+            <input type="text" name="bande_passante" placeholder="Bande passante (ex: 10 Gbps)">
+            <input type="text" name="emplacement" placeholder="Emplacement (ex: salle A, Rack 4)" required>
+            
+            <input type="text" name="description" placeholder="Description courte (ex: Matériel Dell PowerEdge)" required style="grid-column: span 2;">
+
+            <button type="submit" class="btn-add">ENREGISTRER LA RESSOURCE DANS LE PARC</button>
         </div>
+    </form>
+</div>
 
         <div class="card">
             <h2>🖥️ Parc des ressources supervisées</h2>

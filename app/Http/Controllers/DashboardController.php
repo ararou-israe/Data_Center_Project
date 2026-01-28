@@ -135,5 +135,3 @@ public function repondreSignal(Request $request, $id)
         return back()->with('success', 'État de la ressource mis à jour.');
     }
 }
-
-    
