@@ -43,6 +43,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('/admin/dashboard');
         Route::get('/admin/users', [AdminController::class, 'user'])->name('/admin/users');
         Route::get('/admin/ressources', [AdminController::class, 'ressource'])->name('/admin/ressources');
+        Route::get('/edit-user/{user}', [AdminController::class, 'edit_user']);
+        Route::put('/edit-user/{user}', [AdminController::class, 'update_user'])->name('/edit-user/update');
+        Route::delete('/delete-user/{user}', [AdminController::class, 'delete_user']);
+        Route::put('/apruve-user/{user}', [AdminController::class, 'apruve_user']);
+        Route::put('/maintenance/{{ressource}}', [AdminController::class, 'maintenance']);
+
 
         /* Route::get('/admin/dashboard', function() {
             return "Tableau de bord Admin";
@@ -55,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
             return view('Administrateur');
         });*/
     });
+
 
    // RESPONSABLE TECHNIQUE 
 Route::middleware(['auth', 'role:responsable'])->group(function () {
