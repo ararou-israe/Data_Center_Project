@@ -120,11 +120,10 @@
             <div class="card-footer">
               {{-- ✅ View More (safe placeholder) --}}
               <button class="btn-view">
-                <a class="ko" href="#">View More</a>
+                <a class="ko" href="{{ route('register') }}">View More</a>
               </button>
             </div>
           </div>
-
         </article>
         @endforeach
 
