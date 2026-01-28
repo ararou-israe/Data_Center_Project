@@ -28,7 +28,7 @@
         }
 
         .login-box {
-            background: rgba(255, 255, 255, 0.1); /* Effet de verre léger */
+            background: rgba(255, 255, 255, 0.1); 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 40px;

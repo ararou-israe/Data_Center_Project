@@ -15,6 +15,7 @@ class Ressource extends Model
 
     protected $fillable = [
         'categorie_id',
+        'utilisateur_id',
         'code',
         'nom',
         'etat',

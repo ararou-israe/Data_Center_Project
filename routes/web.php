@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\inscriptionController;
@@ -23,13 +24,13 @@ Route::post('/register', [InscriptionController::class, 'store'])->name('registe
 Route::get('/confirmation', [InscriptionController::class, 'confirmation'])->name('confirmation');
 
 
-// ====================== ROUTES PROTÉGÉES ======================
+// ROUTES PROTÉGÉES 
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard générique (redirection après login)
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // ================= ADMIN =================
+    //  ADMIN 
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/admin/dashboard', function() {
             return "Tableau de bord Admin";
@@ -40,17 +41,32 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    // ================= RESPONSABLE TECHNIQUE =================
-    Route::middleware(['role:responsable'])->group(function () {
-        Route::get('/responsable/dashboard', [ResourceController::class, 'dashboard'])
-            ->name('responsable.dashboard');
+   // RESPONSABLE TECHNIQUE 
+Route::middleware(['auth', 'role:responsable'])->group(function () {
+    
+    // Page principale (Dashboard + Liste des ressources)
+    Route::get('/responsable/dashboard', [DashboardController::class, 'index'])
+        ->name('responsable.dashboard');
 
-        Route::get('/responsable/validations', function() {
-            return "Demandes en attente";
-        });
-    });
+    //  Ajouter une ressource
+    Route::post('/responsable/ressource/store', [DashboardController::class, 'store'])
+        ->name('ressource.store');
 
-    // interface de  UTILISATEUR INTERNE  enseignant ingenieur er doctorant
+    //  Changer l'état (Maintenance / Désactiver)
+    Route::post('/responsable/ressource/{id}/status', [DashboardController::class, 'updateStatus'])
+        ->name('ressource.status');
+
+    //  Approuver ou Refuser une réservation
+    Route::post('/responsable/reservation/{id}/decider', [DashboardController::class, 'decider'])
+        ->name('responsable.decider');
+
+        //Modération
+        Route::delete('/responsable/moderation/{id}', [DashboardController::class, 'detruireSignalement'])
+    ->name('responsable.moderation');
+  
+
+});
+    // interface de  UTILISATEUR INTERNE  
     Route::middleware(['role:utilisateur_interne'])->group(function () {
 
         // Dashboard utilisateur interne ( ressources + tableau + formulaire)
@@ -65,6 +81,11 @@ Route::middleware(['auth'])->group(function () {
            
     });
 
-    // ================= LOGOUT =================
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // LOGOUT 
+   Route::post('/logout', function (Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    })->name('logout');
 });
