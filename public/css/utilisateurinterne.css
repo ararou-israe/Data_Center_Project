@@ -7,7 +7,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(135deg, #f8fafc, #82ace2); 
+            background: linear-gradient(135deg, #061f38, #82ace2); 
              color: #362f71;
             line-height: 1.6;
         }
@@ -22,7 +22,7 @@
 
         /*header */
         header {
-            background: linear-gradient(135deg, #1e40af, #3b82f6); 
+            background: linear-gradient(135deg, #0b1f59, #2154a6); 
             color: white;
             padding: 3rem 2rem;
             text-align: center;
@@ -76,8 +76,8 @@
 
         h2 {
             font-size: 2.2rem;
-            color: #1e40af;
-            border-bottom: 4px solid #3b82f6;
+            color: #b9c5ec;
+            border-bottom: 4px solid #4b8df7;
             padding-bottom: 0.1rem;
             margin-top: 2rem;
             margin-bottom: 1.5rem;
@@ -87,13 +87,13 @@
 
 
         form {
-         background: white;
+         background: rgb(255, 255, 255);
          padding: 2.5rem;
             border-radius: 20px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
             margin: 2rem auto;
             width: 100%;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #203662;
         }
 
         form label {
