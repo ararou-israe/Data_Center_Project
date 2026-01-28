@@ -319,39 +319,68 @@
     </table>
 </div>
 
-        <div class="card" style="border-top: 5px solid var(--warning);">
+    <div class="card" style="border-top: 5px solid var(--warning);">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h3 style="color: var(--warning); margin: 0; display: flex; align-items: center; gap: 10px;">
-            <span>🛡️</span> Modération & Alertes Discussions
+            <span>🛡️</span> Modération & Alertes Problèmes Réservations
         </h3>
-        <span style="font-size: 0.8rem; color: var(--text-muted);">Contrôle des messages signalés</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Contrôle des problèmes signalés par les utilisateurs</span>
     </div>
 
     <table style="width: 100%; border-collapse: collapse;">
         <thead>
             <tr style="border-bottom: 2px solid var(--border-glass);">
                 <th style="padding: 12px; color: var(--text-muted); font-size: 0.8rem;">Ressource</th>
-                <th style="padding: 12px; color: var(--text-muted); font-size: 0.8rem;">Auteur</th>
-                <th style="padding: 12px; color: var(--text-muted); font-size: 0.8rem;">Message / Alerte</th>
-                <th style="padding: 12px; color: var(--text-muted); font-size: 0.8rem; text-align: center;">Action</th>
+                <th style="padding: 12px; color: var(--text-muted); font-size: 0.8rem;">Utilisateur</th>
+                <th style="padding: 12px; color: var(--text-muted); font-size: 0.8rem;">Problème signalé</th>
+                <th style="padding: 12px; color: var(--text-muted); font-size: 0.8rem; text-align: center;">Action / Réponse</th>
             </tr>
         </thead>
         <tbody>
             @forelse($signalements as $s)
-                <tr style="border-bottom: 1px solid var(--border-glass); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background='transparent'">
+                <tr style="border-bottom: 1px solid var(--border-glass); transition: background 0.3s;" 
+                    onmouseover="this.style.background='rgba(255,255,255,0.02)'" 
+                    onmouseout="this.style.background='transparent'">
+                    
+                    <!-- Nom de la ressource -->
                     <td style="padding: 15px;">
                         <span style="color: var(--accent); font-weight: 600;">{{ $s->ressource->nom }}</span>
                     </td>
+
+                    <!-- Utilisateur qui a signalé -->
                     <td style="padding: 15px;">
                         <span style="font-size: 0.9rem;">{{ $s->utilisateur->prenom ?? 'Utilisateur' }}</span>
                     </td>
+
+                    <!-- Description du problème -->
                     <td style="padding: 15px;">
                         <div style="background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; font-size: 0.9rem; border-left: 3px solid var(--warning);">
-                            "{{ $s->description }}"
+                            {{ $s->problem }}
                         </div>
                     </td>
+
+                    <!-- Réponse / Action du responsable -->
                     <td style="padding: 15px; text-align: center;">
-                        <form action="{{ route('responsable.moderation', $s->id) }}" method="POST" onsubmit="return confirm('Supprimer ce message définitivement ?')">
+                        @if($s->reponse)
+                            <!-- Si le responsable a déjà répondu -->
+                            <div style="background: rgba(34,197,94,0.2); color: #22c55e; padding: 6px 10px; border-radius: 6px; font-size: 0.85rem;">
+                                ✅ Répondu : {{ $s->reponse }}
+                            </div>
+                        @else
+                            <!-- Formulaire de réponse -->
+                            <form action="{{ route('responsable.repondreSignal', $s->id) }}" method="POST" style="display:flex; gap:5px;">
+                                @csrf
+                                <input type="text" name="reponse" placeholder="Réponse du responsable" required
+                                       style="flex-grow:1; padding:5px; border:1px solid #ccc; border-radius:4px; font-size:0.85rem;">
+                                <button type="submit" style="background:#10b981; color:white; border:none; padding:5px 10px; border-radius:4px; font-size:0.85rem; cursor:pointer;">
+                                    Répondre
+                                </button>
+                            </form>
+                        @endif
+
+                        <!-- Bouton supprimer signalement -->
+                        <form action="{{ route('responsable.moderation', $s->id) }}" method="POST" 
+                              onsubmit="return confirm('Supprimer ce signalement définitivement ?')" style="margin-top:5px;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn-action btn-reject" style="width: 100%; justify-content: center;">
@@ -363,7 +392,7 @@
             @empty
                 <tr>
                     <td colspan="4" style="padding: 40px; text-align: center; color: var(--text-muted); font-style: italic;">
-                        ✨ Aucune discussion ou alerte à modérer pour le moment.
+                        ✨ Aucun problème signalé pour le moment.
                     </td>
                 </tr>
             @endforelse

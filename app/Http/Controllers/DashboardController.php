@@ -76,6 +76,23 @@ class DashboardController extends Controller
     }
 }
     
+public function repondreSignal(Request $request, $id)
+{
+    // Validation
+    $request->validate([
+        'reponse' => 'required|string|max:500'
+    ]);
+
+    // Récupérer le signalement
+    $signal = SigProb::findOrFail($id);
+
+    // Mettre à jour la réponse
+    $signal->update([
+        'reponse' => $request->reponse
+    ]);
+
+    return back()->with('success', 'Réponse enregistrée avec succès !');
+}
     public function detruireSignalement($id)
     {
         $signal = SigProb::findOrFail($id);
