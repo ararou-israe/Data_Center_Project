@@ -78,6 +78,8 @@ Route::middleware(['auth', 'role:responsable'])->group(function () {
         //Modération
         Route::delete('/responsable/moderation/{id}', [DashboardController::class, 'detruireSignalement'])
     ->name('responsable.moderation');
+    Route::post('/responsable/signalement/{id}/repondre', [DashboardController::class, 'repondreSignal'])
+    ->name('responsable.repondreSignal');
   
 
 });
