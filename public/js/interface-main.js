@@ -1,6 +1,6 @@
-/* ===============================
+/* 
    MOBILE NAV MENU
-================================ */
+ */
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
 
@@ -10,9 +10,9 @@ if (burger && navLinks) {
   });
 }
 
-/* ===============================
+/* 
    CATEGORY TABS FILTER
-================================ */
+*/
 const tabs = document.getElementById('tabs');
 const cards = document.querySelectorAll('.card');
 
@@ -39,9 +39,9 @@ if (tabs && cards.length) {
   });
 }
 
-/* ===============================
+/*
    SLIDER (ARROWS + DOTS)
-================================ */
+*/
 const track = document.getElementById('track');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
@@ -78,9 +78,9 @@ function updateSlider() {
   if (nextBtn) nextBtn.classList.toggle('is-disabled', currentIndex === getMaxIndex());
 }
 
-/* ===============================
+/*
    ARROWS
-================================ */
+ */
 if (nextBtn) {
   nextBtn.addEventListener('click', () => {
     if (currentIndex < getMaxIndex()) {
@@ -99,9 +99,9 @@ if (prevBtn) {
   });
 }
 
-/* ===============================
+/* 
    DOTS
-================================ */
+*/
 dots.forEach((dot, index) => {
   dot.addEventListener('click', () => {
     if (index <= getMaxIndex()) {
@@ -111,9 +111,9 @@ dots.forEach((dot, index) => {
   });
 });
 
-/* ===============================
+/* 
    INIT (IMPORTANT FIX)
-================================ */
+ */
 window.addEventListener('DOMContentLoaded', () => {
   // SHOW ALL cards by default
   cards.forEach(card => {
@@ -123,9 +123,9 @@ window.addEventListener('DOMContentLoaded', () => {
   updateSlider();
 });
 
-/* ===============================
+/* 
    FOOTER → TABS SYNC
-================================ */
+ */
 document.querySelectorAll('.footer-column a[data-cat]').forEach(link => {
   link.addEventListener('click', () => {
     const type = link.dataset.cat;

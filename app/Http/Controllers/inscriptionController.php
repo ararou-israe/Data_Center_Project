@@ -8,16 +8,16 @@ use Illuminate\Support\Facades\Hash;
 
 class InscriptionController extends Controller
 {
-    // afficher le formulaire
+    // afficher le formulaire d'inscription
     public function create()
     {
         return view('inscription');
     }
 
-    // traiter l'inscription
+    
     public function store(Request $request)
     {
-        // 1. Validation avec messages personnalisés
+        
         $request->validate(
             [
                 'nom' => 'required|string|max:255',
@@ -31,11 +31,11 @@ class InscriptionController extends Controller
                 'email.required' => '❌ L’email est obligatoire.',
                 'password.confirmed' => '❌ Les mots de passe ne correspondent pas.',
                 'password.min' => '❌ Le mot de passe doit contenir au moins 8 caractères.',
-                'roles.required' => '❌ Veuillez sélectionner un rôle.',
+                'roles.required' => '❌ Veuillez sélectionner votre identite.',
             ]
         );
 
-        // 2. Création utilisateur
+        // creer un utilisateur
         Utilisateur::create([
             'nom' => $request->nom,
             'prenom' => $request->prenom,
@@ -45,7 +45,7 @@ class InscriptionController extends Controller
             'status' => 'en attente',
         ]);
 
-        // 3. Redirection vers page confirmation
+        //  Redirection vers page confirmation
         return redirect()->route('confirmation');
     }
 

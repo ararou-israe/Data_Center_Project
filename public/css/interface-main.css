@@ -1,27 +1,31 @@
 /* ================= GLOBAL ================= */
 * {
   box-sizing: border-box;
+  /* background-color: #000; */
 }
 
 html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+
 }
 
 body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  background: #f4f6ff;
   background-color: transparent;
+ background-color: #000;
   color: #0f172a;
 }
 
 /* ================= NAVBAR ================= */
 .navbar {
+  
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #fff;
+  background: black;
+
   border-bottom: 1px solid rgba(0,0,0,.08);
 }
 
@@ -39,7 +43,8 @@ body {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: #0f172a;
+  /* color: #0f172a; */
+color: white;
   font-weight: 900;
 }
 
@@ -56,9 +61,16 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: rgba(15,23,42,.75);
+  color: white;
   font-weight: 700;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
+
+.nav-links a:hover {
+  color: #3563f5;
+  text-shadow: 0 0 8px rgba(53, 99, 245, 0.6);
+}
+
 
 .nav-actions {
   display: flex;
@@ -71,32 +83,165 @@ body {
   border: 1px solid rgba(0,0,0,.15);
   background: #fff;
   font-weight: 800;
+  text-decoration: none;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
-.btn.primary {
-  background: #3563f5;
-  color: #fff;
-  border-color: #3563f5;
+.btn:hover{
+   background-color: #3563f5;
+   color: #000;
+  /* text-shadow: 0 0 8px rgba(53, 99, 245, 0.6); */
 }
 
-/* ================= HERO ================= */
-.hero {
-  background: #4b5160;
-  padding: 44px 0;
+
+/* ================= HERO SECTION ================= */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+background-color: #000;
+    overflow: hidden;
+    color: #e7e7e7;
 }
 
+/* background image */
+.hero-gradient {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* light blur */
+.hero-blur {
+    position: absolute;
+    top: 42%;
+    right: 0;
+    width: 30rem;
+    height: 0;
+    box-shadow: 0 0 700px 30px white;
+    rotate: -30deg;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* layout */
 .hero-inner {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 16px;
-  color: #fff;
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 6%;
+
+    min-height: 70vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.hero h1 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 900;
+/* left content */
+.hero-content {
+    max-width: 40rem;
 }
+
+/* ================= TAG ================= */
+
+.tag-box {
+    width: 288px;
+    height: 35px;
+    border-radius: 50px;
+    background: linear-gradient(
+        to right,
+        #656565,
+        #7f42a7,
+        #6600c5,
+        #5300a0,
+        #757575,
+        #656565
+    );
+    background-size: 200%;
+    animation: animationGradient 2.5s linear infinite;
+    box-shadow: 0 0 15px white;
+    margin-bottom: 20px;
+}
+
+@keyframes animationGradient {
+    to {
+        background-position: 200%;
+    }
+}
+
+.tag-box .tag {
+    margin: 3px;
+    height: 34px;
+    background: black;
+    border-radius: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.tag-box .tag:hover {
+    color: #5300a0;
+}
+
+/* ================= TEXT ================= */
+
+.hero-content h1 {
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    margin: 1rem 0;
+    text-shadow: 0 0 10px gray;
+}
+
+.description {
+    font-size: 1.2rem;
+    max-width: 35rem;
+    color: gray;
+    margin-bottom: 20px;
+}
+
+/* ================= BUTTON ================= */
+
+.btn-signing-main {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.6rem 2.5rem;
+    background-color: lightgrey;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: black;
+    transition: background-color 0.2s;
+}
+
+
+.btn-signing-main:hover {
+    background-color: gray;
+}
+
+/* ================= ROBOT ================= */
+
+.hero-robot {
+    position: absolute;   /* key */
+    width: 990px;
+    height: 990px;
+    top: -180px;
+    right:-295px;
+}
+
 
 /* ================= CONTENT ================= */
 .wrap {
@@ -106,6 +251,7 @@ body {
 }
 
 /* ================= TABS ================= */
+
 .tabs {
   display: flex;
   justify-content: center;
@@ -150,18 +296,14 @@ body {
   display: flex;
   gap: 26px;
   padding: 20px;
-  width: max-content;      /* 🔥 CRITICAL FIX */
+  width: max-content;    
   transition: transform .35s ease;
 }
 /* ================= CARD ================= */
 .card {
-  /* flex: 0 0 calc((100% - 52px) / 3);
-  background: #fff;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 20px 45px rgba(16,24,40,.12); */
 
-    flex: 0 0 320px;         /* 🔥 FIXED WIDTH */
+
+    flex: 0 0 320px;         
   background: #fff;
   border-radius: 28px;
   overflow: hidden;
@@ -193,13 +335,11 @@ body {
   z-index: 10;
 }
 
-/* Hovered card comes forward */
-
 
 
 /* ===== CARD TOP ===== */
 .card-top {
-  background: #3b63f3;
+  background-color: #2b3fa8;
   color: #fff;
   padding: 22px;
   position: relative;
@@ -254,8 +394,7 @@ body {
 
   display: flex;
   flex-direction: column;
-  flex: 1; /* 🔥 fills remaining height */
-}
+  flex: 1;}
 
 /* ===== CARD BOTTOM TEXT (CONSISTENT FOR ALL) ===== */
 .card-bottom h3 {
@@ -288,18 +427,25 @@ body {
 
 .card-footer {
   margin-top: auto; /* 🔥 pushes button to bottom */
+  cursor: pointer;
 }
 
 .btn-view {
-  background: #3563f5;
+  background: #2b3fa8;
   color: #fff;
   border: none;
   padding: 10px 28px;
   border-radius: 999px;
   font-weight: 800;
 }
-
-/* ================= SLIDER ARROWS (FIXED) ================= */
+.ko{
+    text-decoration: none;
+  color:white;
+}
+.ko:hover{
+   
+   color: #000;
+}
 /* ================= SLIDER ARROWS (CARD BOUNDARY) ================= */
 .nav {
   position: absolute;
@@ -368,7 +514,11 @@ body {
   color: #94a3b8;
 }
 
-
+.tab.active {
+  background:  #2b3fa8;
+  border-color:  #2b3fa8;
+  color: #fff;
+}
 /* ================= FOOTER 1 ================= */
 .footer {
   background: #000;

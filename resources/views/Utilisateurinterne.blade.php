@@ -3,339 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Espace Utilisateur Interne</title>
-
-   <style>
-    /* Reset général */
-     * {
-           box-sizing: border-box; 
-           margin: 0;
-           padding: 0;
-       }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(135deg, #f8fafc, #82ace2); 
-             color: #362f71;
-            line-height: 1.6;
-        }
-
-
-        .container {
-           max-width: 1400px; 
-           margin: 0 auto;
-           padding: 20px 40px; 
-       }
-
-        /*header */
-        header {
-            background: linear-gradient(135deg, #1e40af, #3b82f6); 
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
-            margin-bottom: 2rem;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
-        }
-
-        /* Navigation */
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            position: relative;
-        }
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        /* Soulignement animé */
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: white;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            color: #1e40af;
-            border-bottom: 4px solid #3b82f6;
-            padding-bottom: 0.5rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            text-align: left; 
-            font-weight: 600;
-        }
-
-
-        form {
-         background: white;
-         padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            margin: 2rem auto;
-            width: 100%;
-            border: 1px solid #e5e7eb;
-        }
-
-        form label {
-            display: block;
-            font-weight: 600;
-         margin-bottom: 0.8rem;
-         color: #374151;
-         font-size: 1.1rem;
-        }
-
-        form input, form select, form textarea {
-            width: 100%;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border: 2px solid #d1d5db;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #f9fafb;
-        }
-
-        form input:focus, form select:focus, form textarea:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-            outline: none;
-            background: white;
-        }
-
-        button {
-            background: linear-gradient(135deg, #10b981, #059669); 
-            color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-        }
-
-
-        .ressource-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin: 2rem 0;
-        }
-
-        .ressource-card {
-             background: white;
-            border-radius: 16px;
-            width: 220px;
-            padding: 1.5rem;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #e5e7eb;
-        }
-
-        .ressource-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #f3f4f6;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-header h3 {
-            font-size: 1.3rem;
-            color: #1e40af;
-            font-weight: 700;
-        }
-
-        .code {
-         background: #3b82f6;
-         color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .card-body .info {
-            display: flex;
-            justify-content: space-between;
-             margin-bottom: 0.8rem;
-            font-size: 1rem;
-            color: #6b7280;
-        }
-
-
-        table {
-            width: 100%;
-            margin: 2rem auto;
-            border-collapse: collapse;
-            background: white;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
-        }
-
-        th, td {
-            padding: 1.2rem;
-            text-align: center;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        th {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        tbody tr:hover {
-            background: #f8fafc;
-            transition: background 0.2s ease;
-        }
-
-        .success-msg {
-            background: #d1fae5;
-            color: #065f46;
-            padding: 1.5rem;
-             border-radius: 12px;
-            margin: 2rem auto;
-            max-width: 800px;
-         text-align: center;
-            font-weight: 600;
-            border: 1px solid #a7f3d0;
-        }
-
-
-        input:invalid, select:invalid, textarea:invalid {
-            border-color: #ef4444;
-        }
-
-        input:valid, select:valid, textarea:valid {
-            border-color: #10b981;
-        }
-
-
-        .filtrer_ressource {
-            display: flex;
-            gap: 1rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            margin: 2rem auto;
-            flex-wrap: wrap;
-            justify-content: center;
-            border: 1px solid #e5e7eb;
-        }
-
-        .suivi {
-                background: white;
-            padding: 2rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            margin: 2rem auto;
-            border: 1px solid #e5e7eb;
-        }
-
-
-        details {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
-            border: 1px solid #e5e7eb;
-        }
-
-        details summary {
-            font-weight: 600;
-            color: #1e40af;
-            cursor: pointer;
-        }
-
-        details ul {
-                margin-top: 1rem;
-            padding-left: 1.5rem;
-        }
-
-
-        @media (max-width: 768px) {
-            .container {
-            padding: 20px 20px;
-            }
-            header h1 {
-                font-size: 2.5rem;
-         }
-            nav ul {
-                 flex-direction: column;
-                 gap: 1rem;
-         }
-            .ressource-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .filtrer_ressource, .suivi {
-                flex-direction: column;
-            }
-            table {
-                font-size: 0.9rem;
-                }
-             th, td {
-                 padding: 0.8rem;
-            }
-            form {
-                padding: 2rem;
-            }
-   
-        }
-   </style>
-    
+    <link rel="stylesheet" href="{{ asset('css/utilisateurinterne.css') }}">    
 
 </head>
 
 <body>
+    
 
     <header>
     
@@ -353,6 +26,7 @@
         </ul>
       </nav>
     </header>
+<div class="container">
 
   @if ($errors->has('dates'))
        <div style="background:#fee2e2;color:#991b1b;padding:15px;border-radius:10px;margin-bottom:20px;">
@@ -587,6 +261,19 @@
         </ul>
     </details>
 
+</div>
+    <footer>
+        <address >
+            <h3>Contact</h3>
+            <p>Département Data</p>    
 
+            <p>Téléphone: <a href="tel:+2120666123456">+212(0)666123456</a></p>
+            <p>administrateur : <a href="mailto:saad.med@example.com">saad.med@example.com</a></p>
+            
+        </address>
+        <p>&copy; 2025 Data Center. Tous droits réservés.</p>
+    </footer>
 </body>
+
+
 </html>
