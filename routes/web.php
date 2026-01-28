@@ -9,10 +9,17 @@ use App\Http\Controllers\inscriptionController;
 use App\Http\Controllers\reservController; 
 
 // routes generales
+// ✅ FIRST PAGE SEEN BY USER = INTERFACE
+// (loaded via controller to always have $ressources)
+Route::get('/', [ResourceController::class, 'index'])->name('home');
 
-// Page login
-Route::get('/', function () {
-    return view('welcome');
+// Optional alias (same page)
+Route::get('/interface', [ResourceController::class, 'index'])->name('interface');
+
+
+// page de login
+Route::get('/login', function () {
+    return view('welcome'); // login blade
 })->name('login');
 
 // Submit login
