@@ -416,7 +416,7 @@ body.sidebar-closed .main-content{
                         <td>
                         <form action="/maintenance/{{$p->id}}" method="POST" style="display:inline;">
                           @csrf
-                          @method('MIN')
+                          @method('PUT')
                           <button type="submit" class="btn btn-approve">
                           mes en maintenance
                           </button>
@@ -477,8 +477,14 @@ body.sidebar-closed .main-content{
                             <button class="btn btn-approve"><a href="/edit-user/{{$p->id}}">modifier</a></button>
                             <br>
                             <br>
-                            <button class="btn btn-approve"><a href="/edit-user/{{$p->id}}">active</a></button>
-                            </form>
+                            <form action="/active/{{$p->id}}" method="POST" style="display:inline;">
+                          @csrf
+                          @method('PUT')
+                          <button type="submit" class="btn btn-approve">
+                          active
+                          </button>
+                          </form>
+
                         </td>
                         <td>{{ $p->categorie->nom ?? '' }}</td>
                         <td>{{$p->cod}}</td>

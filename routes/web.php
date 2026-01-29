@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/delete-user/{user}', [AdminController::class, 'delete_user']);
         Route::put('/apruve-user/{user}', [AdminController::class, 'apruve_user']);
         Route::put('/maintenance/{{ressource}}', [AdminController::class, 'maintenance']);
+        Route::put('/active/{{$p->id}}', [AdminController::class, 'activate']);
 
 
         /* Route::get('/admin/dashboard', function() {

@@ -124,5 +124,14 @@ public function maintenance(ressource $ressource)
 
     return redirect()->back()->with('success', 'ressource en maintenance.');
 }
+public function activate(ressource $ressource)
+{
+    $ressource->update([
+        
+        'etat' => 'disponible',
+    ]);
+
+    return redirect()->back()->with('success', 'ressource active.');
+}
 
 }
